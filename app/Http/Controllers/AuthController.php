@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Isue;
 use Illuminate\Http\Request;
 use Validator,Redirect,Response;
 Use App\User;
+
 /*use Auth;*/
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -62,7 +64,7 @@ class AuthController extends Controller
             /* $user_name = DB::table('users')->where('id',$request->id)->pluck('username');*/
            /*  $user_name = DB::select("SELECT username FROM 'users' WHERE id = '$request->id'");*/
              $user_name = User::where('id',$request->id )->pluck('username');
-           /*  $id=session(['username' => $user_name]);*/
+             $username=session(['username' => $user_name]);
              return redirect()->route('dashboardUser');
          }
          return redirect()->back();
@@ -116,20 +118,59 @@ class AuthController extends Controller
       ]);
     }
 
+    
+
+  /*  public function insert(Request $request)
+    {
+        request()->validate([
+
+
+        'id' => 'required',
+        'machineSerial' => 'required',
+        'hardwareSoftware' => 'required',
+        'type' => 'required',
+        'discription' => 'required',
+        'softwarediscription' => 'present',
+        'status' => 'required',
+
+
+        ]);
+
+        $data = $request->all();
+
+        $check = $this->postinsert($data);
+      /*  return back();*/
+      /*
+
+    }
+    public function postinsert(array $data)
+    {
+      return Isue::insert([
+
+        'id' => $data['id'],
+        'machineSerial' => $data['machineSerial'],
+        'hardwareSoftware' => $data['hardwareSoftware'],
+        'type' => $data['type'],
+
+        'discription' => $data['discription'],
+        'softwarediscription' => $data['softwarediscription'],
+        'status'=>'0'
+      ]);
+    }*/
     function insert(Request $req){
         $id=$req->input('id');
         $machineSerial=$req->input('machineSerial');
         $hardwareSoftware=$req->input('hardwareSoftware');
-        $type=$req->input('type');
-        $discription=$req->input('discription');
-        $softwarediscription=$req->input('softwarediscription');
+        $type=$req->input('type')? $req-> get('type') : 'software';
+        $discription=$req->input('discription')? $req-> get('discription') : 'software';
+        $softwarediscription=$req->input('softwarediscription') ? $req-> get('softwarediscription') : 'hardware';
         $status='0';
 
         $data=array('id'=>$id,'machineSerial'=>$machineSerial,'hardwareSoftware'=>$hardwareSoftware,'type'=>$type,'discription'=>$discription,'softwarediscription'=>$softwarediscription,'status'=>$status);
         DB::table('isue')->insert($data);
-       /* return view('dashboardUser');*/
-       return back();
-    }
+        return back();
+   }
+
 
     public function logout() {
         Session::flush();
