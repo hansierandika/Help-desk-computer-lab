@@ -8,7 +8,7 @@
         <hr/>
         <div class="sidebar-wrapper" id="sidebar-wrapper">
             <ul class="nav">
-                <li class="active ">
+                <li class="active">
                     <a href="dashboardAdmin">
                         <i class="now-ui-icons design_app"></i>
                         <p>Dashboard</p>

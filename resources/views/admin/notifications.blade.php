@@ -8,14 +8,14 @@
         <hr/>
         <div class="sidebar-wrapper" id="sidebar-wrapper">
             <ul class="nav">
-                <li class="active ">
+                <li>
                     <a href="dashboardAdmin">
                         <i class="now-ui-icons design_app"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
-                <li>
+                <li class="active ">
                     <a href="notification">
                         <i class="now-ui-icons ui-1_bell-53"></i>
                         <p>Notifications</p>
