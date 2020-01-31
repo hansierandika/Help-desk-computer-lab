@@ -16,6 +16,7 @@ class CreateIsueTable extends Migration
         Schema::create('isue', function (Blueprint $table) {
             $table->bigIncrements('no');
             $table->string('id');
+            $table->string('ComputerLab');
             $table->string('machineSerial');
             $table->string('hardwareSoftware');
             $table->string('type')->default('software');

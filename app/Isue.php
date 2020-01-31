@@ -19,6 +19,7 @@ class Isue extends Model
      */
     protected $fillable = [
         'id',
+        'ComputerLab',
         'machineSerial',
         'hardwareSoftware',
         'type',

@@ -12,14 +12,14 @@ Registration
     <div class="col-md-3">
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" id="col-md-6" style="background-color: dodgerblue; color: antiquewhite">
 
             <h1 id="h1register" class="text-center">REGISTER</h1>
 
 
             <div class="form-row">
                 <div class="col-md-3">
-                    <label class="label col-md-3 control-label">Username</label>
+                    <label class="label col-md-3 control-label" id="nameTag">Username</label>
                 </div>
                 <div class="col-md-8">
                     <input type="text" class="form-control" name="username" placeholder="User Name">
@@ -31,7 +31,7 @@ Registration
 
             <div class="form-row">
                 <div class="col-md-3">
-                    <label class="label col-md-3 control-label">Id</label>
+                    <label class="label col-md-3 control-label" id="nameTag">Id</label>
                 </div>
                 <div class="col-md-8">
                     <input type="text" class="form-control" name="id" placeholder="Ex: 15APC0000">
@@ -43,7 +43,7 @@ Registration
 
             <div class="form-row">
                 <div class="col-md-3">
-                    <label class="label col-md-3 control-label">Password</label>
+                    <label class="label col-md-3 control-label" id="nameTag">Password</label>
                 </div>
 
                 <div class="col-md-4">
@@ -63,7 +63,7 @@ Registration
 
             <div class="form-row">
                 <div class="col-md-3">
-                    <label class="label col-md-3 control-label">E-mail</label>
+                    <label class="label col-md-3 control-label" id="nameTag">E-mail</label>
                 </div>
                 <div class="col-md-8">
                     <input type="email" class="form-control" name="email" placeholder="E-mail">

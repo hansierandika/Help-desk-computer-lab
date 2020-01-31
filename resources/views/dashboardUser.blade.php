@@ -27,6 +27,14 @@ Registration
                         <legend>Help Desk Portal</legend>
                         <input type="hidden" name="id" value="{{ session()->get('id') }}" placeholder="00AAA0000">
 
+Computer Lab:
+<select name="ComputerLab">
+    <option name="ComputerLab" value="CIS Lab1">CIS Lab1</option>
+    <option name="ComputerLab" value="CIS Lab2">CIS Lab2</option>
+    <option name="ComputerLab" value="PST Lab">PST_lab</option>
+  </select>                        
+<br>
+                        <br>
                         Machine Serial:
                         <input type="text" name="machineSerial" id="machineSerial" placeholder="CIS01C05">
                         <br>

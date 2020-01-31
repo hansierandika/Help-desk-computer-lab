@@ -14,6 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/notification', function () {
+    return view('admin/notifications');
+});
+Route::get('/users', function () {
+    return view('admin/user');
+});
+Route::get('/tables', function () {
+    return view('admin/tables');
+});
 
 Auth::routes();
 
@@ -25,10 +34,9 @@ Route::post('/login/custom', [
     'as'=>'login.custom'
 ]);
 
-
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboardAdmin', function(){
-        return view('dashboardAdmin');
+        return view('admin/dashboard');
     })->name('dashboardAdmin');;
     Route::get('/dashboardUser', function(){
         return view('dashboardUser');

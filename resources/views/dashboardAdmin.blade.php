@@ -18,9 +18,13 @@ Dashboard
 
         <div class="row">
                 <div class="col-md-3" id="left-side">
-                    <div class="row" id="lefttopheader">
+                    <div class="row" id="lefttopheader" style="height:20px;">
+                        
+                    </div>
+                    <div>
 
                     </div>
+                    
                 </div>
                 <div class="col-md-9" id="right-side">
                     <div class="row" id="topheader">
@@ -29,6 +33,7 @@ Dashboard
                     <div class="row">
 
                     </div>
+
                 </div>
         </div>
     </div>

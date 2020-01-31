@@ -159,6 +159,7 @@ class AuthController extends Controller
     }*/
     function insert(Request $req){
         $id=$req->input('id');
+        $ComputerLab=$req->input('ComputerLab');
         $machineSerial=$req->input('machineSerial');
         $hardwareSoftware=$req->input('hardwareSoftware');
         $type=$req->input('type')? $req-> get('type') : 'software';
@@ -166,7 +167,7 @@ class AuthController extends Controller
         $softwarediscription=$req->input('softwarediscription') ? $req-> get('softwarediscription') : 'hardware';
         $status='0';
 
-        $data=array('id'=>$id,'machineSerial'=>$machineSerial,'hardwareSoftware'=>$hardwareSoftware,'type'=>$type,'discription'=>$discription,'softwarediscription'=>$softwarediscription,'status'=>$status);
+        $data=array('id'=>$id,'ComputerLab'=>$ComputerLab,'machineSerial'=>$machineSerial,'hardwareSoftware'=>$hardwareSoftware,'type'=>$type,'discription'=>$discription,'softwarediscription'=>$softwarediscription,'status'=>$status);
         DB::table('isue')->insert($data);
         return back();
    }

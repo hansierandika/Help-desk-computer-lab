@@ -5,12 +5,12 @@
     background-size: cover;*/
         font-family: new time roman;
     }
-    
+
     #background1 {
         margin-top: -20px;
         margin-left: 30%;
     }
-    
+
     #card1 {
         background-color: white;
         margin-top: 5%;
@@ -20,21 +20,21 @@
         height: 50%;
         color: black;
     }
-    
+
     #h1register {
         font-size: 40px;
         color: rgb(39, 35, 35);
         margin-top: 20px;
         margin-bottom: 30px;
     }
-    
+
     .label {
         font-size: 19px;
         margin-top: 20px;
         font-weight: normal;
         color: rgba(12, 7, 44, 0.4);
     }
-    
+
     .form-control {
         background: rgba(255, 255, 255, 0.2);
         border: 0px;
@@ -44,13 +44,13 @@
         color: white;
         margin-top: 20px;
     }
-    
+
     small {
         font-size: 18px;
         color: gray;
         text-align: center;
     }
-    
+
     .btn-info {
         margin-top: 30px;
         margin-left: 150px;
@@ -58,7 +58,7 @@
         font-size: 19px;
         border-radius: 1000px;
     }
-    
+
     .col-md-6 {
         background: rgba(177, 155, 155, 0.4);
         height: fit-content;
@@ -69,7 +69,7 @@
         padding-left: 5%;
         padding-bottom: 30px;
     }
-    
+
     #btn1 {
         margin-top: 20px;
         margin-left: 55%;

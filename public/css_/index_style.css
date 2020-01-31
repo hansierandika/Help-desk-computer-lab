@@ -59,7 +59,7 @@
         border-radius: 1000px;
     }
     
-    .col-md-6 {
+    #col-md-6 {
         background: rgba(177, 155, 155, 0.4);
         height: fit-content;
         box-shadow: -1px 1px 60px 10px black inset;
