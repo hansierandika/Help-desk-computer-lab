@@ -8,6 +8,8 @@ use Validator,Redirect,Response;
 Use App\User;
 
 /*use Auth;*/
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Session;
@@ -88,6 +90,17 @@ class AuthController extends Controller
 
         return Redirect::to("login")->withSuccess('Great! You have Successfully loggedin');
     }
+    public function create(array $data)
+    {
+      return User::create([
+
+        'username' => $data['username'],
+        'id' => $data['id'],
+        'admin'=>'0',
+        'password' => Hash::make($data['password']),
+        'email' => $data['email']
+      ]);
+    }
 
     public function dashboardUser()
     {
@@ -106,18 +119,7 @@ class AuthController extends Controller
        return Redirect::to("login")->withSuccess('Opps! You do not have access');
     }
 
-    public function create(array $data)
-    {
-      return User::create([
-
-        'username' => $data['username'],
-        'id' => $data['id'],
-        'admin'=>'0',
-        'password' => Hash::make($data['password']),
-        'email' => $data['email']
-      ]);
-    }
-
+    
     
 
   /*  public function insert(Request $request)
@@ -158,18 +160,26 @@ class AuthController extends Controller
       ]);
     }*/
     function insert(Request $req){
+        $this->validate($req,[
+            'machineSerial'=>'required',
+            'hardwareSoftware'=>'required',
+                
+        ]);
+
+        $name=$req->input('name');
         $id=$req->input('id');
         $ComputerLab=$req->input('ComputerLab');
-        $machineSerial=$req->input('machineSerial');
-        $hardwareSoftware=$req->input('hardwareSoftware');
+       /* $machineSerial=$req->input('machineSerial');
+        $hardwareSoftware=$req->input('hardwareSoftware');*/
         $type=$req->input('type')? $req-> get('type') : 'software';
         $discription=$req->input('discription')? $req-> get('discription') : 'software';
         $softwarediscription=$req->input('softwarediscription') ? $req-> get('softwarediscription') : 'hardware';
         $status='0';
 
-        $data=array('id'=>$id,'ComputerLab'=>$ComputerLab,'machineSerial'=>$machineSerial,'hardwareSoftware'=>$hardwareSoftware,'type'=>$type,'discription'=>$discription,'softwarediscription'=>$softwarediscription,'status'=>$status);
+        $data=array('id'=>$id,'ComputerLab'=>$ComputerLab,'machineSerial'=>$req->machineSerial,'hardwareSoftware'=>$req->hardwareSoftware,'type'=>$type,'discription'=>$discription,'softwarediscription'=>$softwarediscription,'status'=>$status);
         DB::table('isue')->insert($data);
-        return back();
+        Mail::to('erandikahansi95@gmail.com')->send(new SendMail($data));
+        return back()->with('success', 'Thanks for contacting us!');
    }
 
 

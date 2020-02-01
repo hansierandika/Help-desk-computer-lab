@@ -6,10 +6,10 @@ Registration
 
 @section('content')
 
-<div class="card" id="dash1">
+<div class="card" id="dash1" style="background-color:white;">
         <div class="row">
                 <div class="col-md-5">
-                        <h3 style="color:antiquewhite;font-family: 'Aclonica';">Welcome {{ session()->get('username') }}</h3>
+                        <h3 style="color: indigo;font-family: 'Aclonica';">Welcome {{ session()->get('username') }}</h3>
                 </div>
                 <div class="col-md-7">
                         <a class="btn btn-outline-dark" href="{{url('logout')}}" style="float: right;">Logout</a>
@@ -20,19 +20,35 @@ Registration
             <div class="container">
                 <div class="card" style="" id="contReport">
 
-
+                    @if(count($errors)>0)
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dissmiss="alert">x</button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}}}$e}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    @if($message= Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dissmiss="alert">x</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
                     <form action="/insert" method="post" id="myform">
                         @csrf
                          <fieldset>
                         <legend>Help Desk Portal</legend>
                         <input type="hidden" name="id" value="{{ session()->get('id') }}" placeholder="00AAA0000">
+                        <input type="hidden" name="name" value="{{ session()->get('username') }}" placeholder="00AAA0000">
 
 Computer Lab:
 <select name="ComputerLab">
     <option name="ComputerLab" value="CIS Lab1">CIS Lab1</option>
     <option name="ComputerLab" value="CIS Lab2">CIS Lab2</option>
     <option name="ComputerLab" value="PST Lab">PST_lab</option>
-  </select>                        
+  </select>
 <br>
                         <br>
                         Machine Serial:
@@ -64,7 +80,7 @@ Computer Lab:
                         <br>
                         <br>
 
-                        <input class="btn btn-outline-success" name="save" type="submit" onclick="submit();" value="Submit" style="float: right">
+                        <input class="btn btn-success" name="save" type="submit" onclick="submit();" value="Submit" style="float: right">
 
                         </fieldset>
                     </form>
@@ -103,9 +119,9 @@ Computer Lab:
             </div>
         </div>
         <div class="col-md-5">
-            <button class="btn btn-outline-dark" id="btReport">Report Problem</button>
-            <button class="btn btn-outline-dark" id="btView">View my reports</button>
-            <button class="btn btn-outline-dark" id="btSolved">Solved</button>
+            <button class="btn btn-secondary" id="btReport">Report Problem</button>
+            <button class="btn btn-secondary" id="btView">View my reports</button>
+            <button class="btn btn-secondary" id="btSolved">Solved</button>
         </div>
     </div>
 </div>
