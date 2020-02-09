@@ -17,7 +17,9 @@ class Isue extends Model
      *
      * @var array
      */
-    protected $fillable = [
+    protected $table = "isue";
+
+     protected $fillable = [
         'id',
         'ComputerLab',
         'machineSerial',

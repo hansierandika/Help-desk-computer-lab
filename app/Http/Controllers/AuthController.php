@@ -119,8 +119,8 @@ class AuthController extends Controller
        return Redirect::to("login")->withSuccess('Opps! You do not have access');
     }
 
-    
-    
+
+
 
   /*  public function insert(Request $request)
     {
@@ -163,7 +163,7 @@ class AuthController extends Controller
         $this->validate($req,[
             'machineSerial'=>'required',
             'hardwareSoftware'=>'required',
-                
+
         ]);
 
         $name=$req->input('name');
@@ -182,6 +182,11 @@ class AuthController extends Controller
         return back()->with('success', 'Thanks for contacting us!');
    }
 
+  /* public function view(){
+    $issue = Isue::all();
+
+    return view('admin/dashboard',['issues'=>$issue]);
+    }*/
 
     public function logout() {
         Session::flush();

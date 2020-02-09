@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-    
+
 });
 Route::get('/notification', function () {
     return view('admin/notifications');
@@ -62,5 +62,7 @@ Route::get('registration', 'AuthController@registration');
 
 /*Route::view('form','dashboardUser');*/
 Route::post('/insert','AuthController@insert');
+/*
+Route::get('/dashboardAdmin','AuthController@view');*/
 
 Route::get('logout', 'AuthController@logout');

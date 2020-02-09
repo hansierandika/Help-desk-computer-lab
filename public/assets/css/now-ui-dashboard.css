@@ -628,8 +628,11 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-success {
-    background-color: #18ce0f;
-    color: #FFFFFF;
+    background-color: #60d859;
+    border-color: #0a8504;
+    color: rgb(5, 15, 2);
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .btn-success:hover,
@@ -643,7 +646,7 @@ fieldset[disabled] .btn-primary.active {
 .show>.btn-success.dropdown-toggle,
 .show>.btn-success.dropdown-toggle:focus,
 .show>.btn-success.dropdown-toggle:hover {
-    background-color: #1beb11;
+    background-color: #0a8504;
     color: #FFFFFF;
     box-shadow: none;
     border-color: #1beb11;
@@ -1323,23 +1326,23 @@ fieldset[disabled] .btn-link.active {
 }
 
 .form-control {
-    background-color: white;
+    background-color: #f3f3f3;
     border: 1px solid #E3E3E3;
-    border-radius: 12px;
+    border-radius: 10px;
     color: #2c2c2c;
     line-height: normal;
     height: auto;
     font-size: 0.8571em;
     transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     box-shadow: none;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    -ms-border-radius: 12px;
-    -o-border-radius: 12px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
 .form-control:focus {
-    border: 1px solid #329ff9;
+    border: 1px solid #f3f3f3;
     box-shadow: none;
     outline: 0 !important;
     color: #2c2c2c;

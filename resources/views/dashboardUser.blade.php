@@ -9,10 +9,13 @@ Registration
 <div class="card" id="dash1" style="background-color:#FBF7F9;">
         <div class="row">
                 <div class="col-md-5">
-                        <h3 style="color: indigo;font-family: 'Aclonica';">Welcome {{ session()->get('username') }}</h3>
+                        <h6 style="color: indigo;">{{ session()->get('username') }}</h6>
+
+                       
+
                 </div>
                 <div class="col-md-7">
-                        <a class="btn btn-outline-dark" href="{{url('logout')}}" style="float: right;">Logout</a>
+                        <a class="btn btn-outline-dark" href="{{url('logout')}}" style="float: right;background-color: cadetblue;">Logout</a>
                 </div>
         </div>
         <div class="row">
