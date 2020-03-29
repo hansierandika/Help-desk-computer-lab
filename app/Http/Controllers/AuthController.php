@@ -59,7 +59,10 @@ class AuthController extends Controller
             $credentials = $request->only('id', 'password');
             if (Auth::attempt($credentials)) {
              $user=User::where('id',$request->id )->first();
-             if($user->is_admin()){
+             if($user->roleis()){
+                 if($user->is_admin()){
+                    return redirect()->route('dashboardSYSTEM');
+                 }else
                  return redirect()->route('dashboardAdmin');
              }else
              $id=session(['id' => $request->id]);
@@ -106,7 +109,9 @@ class AuthController extends Controller
     {
 
       if(Auth::check()){
-        return view('dashboardUser');
+        $dataS=Isue::all();
+        return view('/dashboardUser')->with('issues',$dataS);
+
       }
        return Redirect::to("login")->withSuccess('Opps! You do not have access');
     }
@@ -115,6 +120,15 @@ class AuthController extends Controller
 
       if(Auth::check()){
         return view('dashboardAdmin');
+      }
+       return Redirect::to("login")->withSuccess('Opps! You do not have access');
+    }
+
+    public function dashboardSYSTEM()
+    {
+
+      if(Auth::check()){
+        return view('dashboardSYSTEM');
       }
        return Redirect::to("login")->withSuccess('Opps! You do not have access');
     }
@@ -163,24 +177,38 @@ class AuthController extends Controller
         $this->validate($req,[
             'machineSerial'=>'required',
             'hardwareSoftware'=>'required',
+            'name'=>'required',
+            'id'=>'required',
+            'ComputerLab'=>'required',
+            'type'=>'required_if:type,software',
+            'discription'=>'required_if:disription,software',
+            'softwarediscription'=>'required_if:softwarediscription,hardware',
+            'status'=>'required_if:status,0',
 
         ]);
-
+/*
         $name=$req->input('name');
         $id=$req->input('id');
-        $ComputerLab=$req->input('ComputerLab');
+        $ComputerLab=$req->input('ComputerLab');*/
        /* $machineSerial=$req->input('machineSerial');
         $hardwareSoftware=$req->input('hardwareSoftware');*/
-        $type=$req->input('type')? $req-> get('type') : 'software';
-        $discription=$req->input('discription')? $req-> get('discription') : 'software';
+     /*   $type=$req->input('type')? $req-> get('type') : 'software';*/
+        /*$discription=$req->input('discription')? $req-> get('discription') : 'software';
         $softwarediscription=$req->input('softwarediscription') ? $req-> get('softwarediscription') : 'hardware';
-        $status='0';
+        $status='0';*/
 
-        $data=array('id'=>$id,'ComputerLab'=>$ComputerLab,'machineSerial'=>$req->machineSerial,'hardwareSoftware'=>$req->hardwareSoftware,'type'=>$type,'discription'=>$discription,'softwarediscription'=>$softwarediscription,'status'=>$status);
+        $data=array('id'=>$req->id,'ComputerLab'=>$req->ComputerLab,'machineSerial'=>$req->machineSerial,'hardwareSoftware'=>$req->hardwareSoftware,'type'=>$req->type? $req-> get('type') : 'software','discription'=>$req->discription? $req-> get('discription') : 'software','softwarediscription'=>$req->softwarediscription? $req-> get('softwarediscription') : 'hardware','status'=>'0');
         DB::table('isue')->insert($data);
         Mail::to('erandikahansi95@gmail.com')->send(new SendMail($data));
+
         return back()->with('success', 'Thanks for contacting us!');
    }
+   public function store()
+{
+    $dataS=Isue::all();
+    return view('/dashboardUser')->with('issues',$dataS);
+
+}
 
   /* public function view(){
     $issue = Isue::all();

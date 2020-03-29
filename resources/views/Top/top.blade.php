@@ -121,6 +121,10 @@ background-color: midnightblue;
         z-index:2;
 
     }
+    #label{
+        color: darkcyan;
+        font-size: 15px;
+    }
 </style>
     </head>
 <body id="background">

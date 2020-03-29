@@ -25,7 +25,8 @@ Route::get('/tables', function () {
     return view('admin/tables');
 });
 Route::get('/dashboardAdmin', function () {
-    return view('admin/dashboard');
+    $isu=DB::table('isue')->get();
+    return view('admin/dashboard',['isu'=>$isu]);
 });
 
 Auth::routes();
@@ -45,6 +46,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboardUser', function(){
         return view('dashboardUser');
     })->name('dashboardUser');;
+    Route::get('/dashboardAdmin', function(){
+        return view('dashboardAdmin');
+    })->name('dashboardSYSTEM');;
 });
 
 Route::get('login', 'AuthController@index');
@@ -62,6 +66,12 @@ Route::get('registration', 'AuthController@registration');
 
 /*Route::view('form','dashboardUser');*/
 Route::post('/insert','AuthController@insert');
+/*Route::get('/store','AuthController@store');*/
+Route::get('/store', function () {
+    $dataS=App\Isue::all();
+    return view('/dashboardUser')->with('issues',$dataS);
+
+});
 /*
 Route::get('/dashboardAdmin','AuthController@view');*/
 

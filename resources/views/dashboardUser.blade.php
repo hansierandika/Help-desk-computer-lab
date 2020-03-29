@@ -11,7 +11,7 @@ Registration
                 <div class="col-md-5">
                         <h6 style="color: indigo;">{{ session()->get('username') }}</h6>
 
-                       
+
 
                 </div>
                 <div class="col-md-7">
@@ -47,7 +47,7 @@ Registration
                         <input type="hidden" name="name" value="{{ session()->get('username') }}" placeholder="00AAA0000">
 
                         <div class="form-group row">
-                            <label for="Computer_Lab" class="col-3 col-form-label">Computer Lab :</label>
+                            <label for="Computer_Lab" id="label" class="col-3 col-form-label">Computer Lab :</label>
                             <div class="col-8">
                                 <select class="form-control form-control-sm" name="ComputerLab">
                                     <option name="ComputerLab" value="CIS Lab1">CIS Lab1</option>
@@ -59,7 +59,7 @@ Registration
 
 
                             <div class="form-group row">
-                                <label for="Machine_Serial" class="col-3 col-form-label">Machine Serial :</label>
+                                <label for="Machine_Serial" id="label" class="col-3 col-form-label">Machine Serial :</label>
                                 <div class="col-8">
                                     <input class="form-control form-control-sm" type="text" name="machineSerial" id="machineSerial" placeholder="CIS01C05">
                                 </div>
@@ -67,9 +67,9 @@ Registration
 
 
 
-                            <label class="form-check-label">
+                            <label class="form-check-label" id="label">
                         <input type="radio" class="btn btn-outline-primary" name="hardwareSoftware"  value="Hardware" id="bt1"/>hardware</label>
-                        <label class="form-check-label">
+                        <label class="form-check-label" id="label">
                         <input type="radio" class="btn btn-outline-primary" name="hardwareSoftware" value="Software" id="bt2"/>Software</label>
 
                                     <div class="row" style="display:none;margin-left: 2%" id="cont1">
@@ -100,6 +100,7 @@ Registration
                 </div>
 
                 <div class="card" style="display:none;" id="contView">
+
                     <table border = "1">
                         <tr>
                         <td>No</td>
@@ -110,8 +111,23 @@ Registration
                         <td>Discription</td>
                         <td>Date</td>
                         </tr>
+                        @if(!empty($issues) && count($issues) > 0)
+                        @foreach ($issues as $issue)
 
+
+                        <tr>
+                            <td>1</td>
+                        <td>{{ $issue['id'] }}</td>
+                        <td>{{ $issue['ComputerLab'] }}</td>
+                        <td>{{ $issue['machineSerial'] }}</td>
+                        <td>{{ $issue['hardwareSoftware'] }}</td>
+                        <td>{{ $issue['type'] }}</td>
+                        <td>{{ $issue['discription'] }}</td>
+                        </tr>
+                        @endforeach
+                        @endif
                         </table>
+
                 </div>
 
                 <div class="card" style="display:none;" id="contSolved">
@@ -132,8 +148,8 @@ Registration
             </div>
         </div>
         <div class="col-md-5">
-            <button class="btn btn-secondary" id="btReport">Report Problem</button>
-            <button class="btn btn-secondary" id="btView">View my reports</button>
+            <button class="btn btn-secondary" id="btReport" >Report Problem</button>
+            <button class="btn btn-secondary" id="btView" onclick="window.location='{{ url("/store") }}'">View my reports</button>
             <button class="btn btn-secondary" id="btSolved">Solved</button>
         </div>
     </div>
@@ -169,6 +185,7 @@ Registration
             $sectionReport.hide();
             $sectionSolved.hide();
             $sectionView.show();
+
         });
 
         $("#btSolved").click(function(){
