@@ -1,4 +1,8 @@
-@extends('./Top.top') @section('title') Dashboard @endsection
+@extends('Layouts.master')
+
+@section('title')
+Dashboard
+@endsection
 @section('content')
 <div class="container">
 <div class="wrapper ">

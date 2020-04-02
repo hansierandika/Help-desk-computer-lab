@@ -27,3 +27,43 @@
                     @endforeach
                     </table>
             </div>
+
+
+
+
+
+
+            /* <div class="col-md-5">
+    
+           <button class="btn btn-secondary" id="btReport" >Report Problem</button>
+            <button class="btn btn-secondary" id="btView" onclick="window.location='{{ url("/store") }}'">View my reports</button>
+            <button class="btn btn-secondary" id="btSolved">Solved</button>
+       
+</div> */
+
+
+
+
+            /*
+        $sectionReport=$('#contReport');
+        $sectionView=$('#contView');
+        $sectionSolved=$('#contSolved');
+    
+        $("#btReport").click(function(){
+            $sectionView.hide();
+            $sectionSolved.hide();
+            $sectionReport.show();
+        });
+    
+        $("#btView").click(function(){
+            $sectionReport.hide();
+            $sectionSolved.hide();
+            $sectionView.show();
+    
+        });
+    
+        $("#btSolved").click(function(){
+            $sectionReport.hide();
+            $sectionView.hide();
+            $sectionSolved.show();
+        });*/

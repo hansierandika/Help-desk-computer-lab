@@ -1,4 +1,4 @@
-@extends('Top.top')
+@extends('Layouts.master')
 
 @section('title')
 Login

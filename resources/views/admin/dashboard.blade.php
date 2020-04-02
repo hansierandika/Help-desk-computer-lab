@@ -1,8 +1,13 @@
-@extends('./Top.top') @section('title') Dashboard @endsection
+@extends('Layouts.master')
+
+@section('title')
+Dashboard
+@endsection
+
 @section('content')
-<div class="container">
-<div class="wrapper ">
-    <div class="sidebar" data-color="orange" style="margin-top: 100px; height: 560px">
+<div class="container" style="margin-left: 20px;">
+<div class="wrapper">
+    <div class="sidebar" data-color="orange" style="margin-top: 10%; height: 80%">
 
        <br/>
         <hr/>

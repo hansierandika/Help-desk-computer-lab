@@ -61,9 +61,11 @@ class AuthController extends Controller
              $user=User::where('id',$request->id )->first();
              if($user->roleis()){
                  if($user->is_admin()){
-                    return redirect()->route('dashboardSYSTEM');
-                 }else
-                 return redirect()->route('dashboardAdmin');
+                    return redirect()->route('dashboardSystem');
+                 }else{
+                    return redirect()->route('dashboardAdmin');
+                 }
+
              }else
              $id=session(['id' => $request->id]);
             /* $user_name = DB::table('users')->where('id',$request->id)->pluck('username');*/
@@ -124,55 +126,15 @@ class AuthController extends Controller
        return Redirect::to("login")->withSuccess('Opps! You do not have access');
     }
 
-    public function dashboardSYSTEM()
+    public function dashboardSystem()
     {
 
       if(Auth::check()){
-        return view('dashboardSYSTEM');
+        return view('dashboardSystem');
       }
        return Redirect::to("login")->withSuccess('Opps! You do not have access');
     }
 
-
-
-
-  /*  public function insert(Request $request)
-    {
-        request()->validate([
-
-
-        'id' => 'required',
-        'machineSerial' => 'required',
-        'hardwareSoftware' => 'required',
-        'type' => 'required',
-        'discription' => 'required',
-        'softwarediscription' => 'present',
-        'status' => 'required',
-
-
-        ]);
-
-        $data = $request->all();
-
-        $check = $this->postinsert($data);
-      /*  return back();*/
-      /*
-
-    }
-    public function postinsert(array $data)
-    {
-      return Isue::insert([
-
-        'id' => $data['id'],
-        'machineSerial' => $data['machineSerial'],
-        'hardwareSoftware' => $data['hardwareSoftware'],
-        'type' => $data['type'],
-
-        'discription' => $data['discription'],
-        'softwarediscription' => $data['softwarediscription'],
-        'status'=>'0'
-      ]);
-    }*/
     function insert(Request $req){
         $this->validate($req,[
             'machineSerial'=>'required',
@@ -186,29 +148,14 @@ class AuthController extends Controller
             'status'=>'required_if:status,0',
 
         ]);
-/*
-        $name=$req->input('name');
-        $id=$req->input('id');
-        $ComputerLab=$req->input('ComputerLab');*/
-       /* $machineSerial=$req->input('machineSerial');
-        $hardwareSoftware=$req->input('hardwareSoftware');*/
-     /*   $type=$req->input('type')? $req-> get('type') : 'software';*/
-        /*$discription=$req->input('discription')? $req-> get('discription') : 'software';
-        $softwarediscription=$req->input('softwarediscription') ? $req-> get('softwarediscription') : 'hardware';
-        $status='0';*/
-
+   
         $data=array('id'=>$req->id,'ComputerLab'=>$req->ComputerLab,'machineSerial'=>$req->machineSerial,'hardwareSoftware'=>$req->hardwareSoftware,'type'=>$req->type? $req-> get('type') : 'software','discription'=>$req->discription? $req-> get('discription') : 'software','softwarediscription'=>$req->softwarediscription? $req-> get('softwarediscription') : 'hardware','status'=>'0');
         DB::table('isue')->insert($data);
-        Mail::to('erandikahansi95@gmail.com')->send(new SendMail($data));
+      /*  Mail::to('erandikahansi95@gmail.com')->send(new SendMail($data));*/
 
         return back()->with('success', 'Thanks for contacting us!');
    }
-   public function store()
-{
-    $dataS=Isue::all();
-    return view('/dashboardUser')->with('issues',$dataS);
-
-}
+   
 
   /* public function view(){
     $issue = Isue::all();
