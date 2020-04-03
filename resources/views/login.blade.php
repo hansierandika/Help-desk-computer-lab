@@ -8,6 +8,23 @@ Login
 <div style="margin-bottom: 92px;margin-top: 90px;">
 <form action="{{ route('login.custom')}}" method="POST">
 {{ csrf_field() }}
+<br>
+@if(count($errors)>0)
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if($message= Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
         <div class="row">
         <div class="col-md-3">
             </div>

@@ -66,14 +66,18 @@ class AuthController extends Controller
                     return redirect()->route('dashboardAdmin');
                  }
 
-             }else
-             $id=session(['id' => $request->id]);
-            /* $user_name = DB::table('users')->where('id',$request->id)->pluck('username');*/
-           /*  $user_name = DB::select("SELECT username FROM 'users' WHERE id = '$request->id'");*/
-             $user_name = User::where('id',$request->id )->pluck('username');
-             $username=session(['username' => $user_name]);
-             return redirect()->route('dashboardUser');
-         }
+             }else{
+                if($user->is_approve()){
+                    $id=session(['id' => $request->id]);
+                /* $user_name = DB::table('users')->where('id',$request->id)->pluck('username');*/
+               /*  $user_name = DB::select("SELECT username FROM 'users' WHERE id = '$request->id'");*/
+                 $user_name = User::where('id',$request->id )->pluck('username');
+                 $username=session(['username' => $user_name]);
+                 return redirect()->route('dashboardUser');
+                 }else
+                 return redirect()->back()->withSuccess('Wait for Admin Approval');
+
+             }  }
          return redirect()->back();
     }
 
@@ -101,6 +105,7 @@ class AuthController extends Controller
 
         'username' => $data['username'],
         'id' => $data['id'],
+        'user_id' => $data['id'],
         'admin'=>'0',
         'password' => Hash::make($data['password']),
         'email' => $data['email']
@@ -141,6 +146,7 @@ class AuthController extends Controller
             'hardwareSoftware'=>'required',
             'name'=>'required',
             'id'=>'required',
+            
             'ComputerLab'=>'required',
             'type'=>'required_if:type,software',
             'discription'=>'required_if:disription,software',
@@ -149,7 +155,7 @@ class AuthController extends Controller
 
         ]);
    
-        $data=array('id'=>$req->id,'ComputerLab'=>$req->ComputerLab,'machineSerial'=>$req->machineSerial,'hardwareSoftware'=>$req->hardwareSoftware,'type'=>$req->type? $req-> get('type') : 'software','discription'=>$req->discription? $req-> get('discription') : 'software','softwarediscription'=>$req->softwarediscription? $req-> get('softwarediscription') : 'hardware','status'=>'0');
+        $data=array('id'=>$req->id,'user_id'=>$req->id,'ComputerLab'=>$req->ComputerLab,'machineSerial'=>$req->machineSerial,'hardwareSoftware'=>$req->hardwareSoftware,'type'=>$req->type? $req-> get('type') : 'software','discription'=>$req->discription? $req-> get('discription') : 'software','softwarediscription'=>$req->softwarediscription? $req-> get('softwarediscription') : 'hardware','status'=>'0');
         DB::table('isue')->insert($data);
       /*  Mail::to('erandikahansi95@gmail.com')->send(new SendMail($data));*/
 

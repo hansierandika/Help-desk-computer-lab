@@ -44,7 +44,7 @@ Dashboard
     <div class="main-panel" id="main-panel">
 
         <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
-          <div class="container-fluid">
+          <div class="container-flid">
             <div class="navbar-wrapper">
 
               <div class="col-md-5">
@@ -76,7 +76,37 @@ Dashboard
                     </div>
                     <div class="card-body">
                       <div class="alert alert-info">
-                        <span>This is a plain notification</span>
+
+                        <table border = "1">
+                        <tr>
+                        <td>No</td>
+
+                        <td>User Name</td>
+                        <td>ID</td>
+                        <td>Email</td>
+                        <td>Status</td>
+                        <td>Action</td>
+
+                        </tr>
+
+
+
+                        @foreach ($data as $u)
+                        <tr>
+<td>{{ $u->no }}</td>
+<td>{{ $u->username }}</td>
+
+<td>{{ $u->user_id }}</td>
+<td>{{ $u->email }}</td>
+<td>@if($u->approved==0)Inactive @else Active @endif</td>
+<td><a href="{{ route('approve',['id'=>$u->user_id]) }}">@if($u->approved==1)Inactive @else Active @endif</a></td>
+</tr>
+                        @endforeach
+
+
+                    </table>
+
+
                       </div>
                       <div class="alert alert-info">
                         <button type="button" aria-hidden="true" class="close">
@@ -161,13 +191,13 @@ Dashboard
                           <div class="col-lg-8 ml-auto mr-auto">
                             <div class="row">
                               <div class="col-md-4">
-                                <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('top','left')">Top Left</button>
+                                <button class="btn btn-primary btn-block" onclick="nowidashboard.showNotification('top','left')">Top Left</button>
                               </div>
                               <div class="col-md-4">
-                                <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('top','center')">Top Center</button>
+                                <button class="btn btn-primary btn-block" onclick="nowidashboard.showNotification('top','center')">Top Center</button>
                               </div>
                               <div class="col-md-4">
-                                <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('top','right')">Top Right</button>
+                                <button class="btn btn-primary btn-block" onclick="nowidashboard.showNotification('top','right')">Top Right</button>
                               </div>
                             </div>
                           </div>
@@ -176,13 +206,13 @@ Dashboard
                           <div class="col-lg-8 ml-auto mr-auto">
                             <div class="row">
                               <div class="col-md-4">
-                                <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('bottom','left')">Bottom Left</button>
+                                <button class="btn btn-primary btn-block" onclick="nowidashboard.showNotification('bottom','left')">Bottom Left</button>
                               </div>
                               <div class="col-md-4">
-                                <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('bottom','center')">Bottom Center</button>
+                                <button class="btn btn-primary btn-block" onclick="nowidashboard.showNotification('bottom','center')">Bottom Center</button>
                               </div>
                               <div class="col-md-4">
-                                <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('bottom','right')">Bottom Right</button>
+                                <button class="btn btn-primary btn-block" onclick="nowidashboard.showNotification('bottom','right')">Bottom Right</button>
                               </div>
                             </div>
                           </div>

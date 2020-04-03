@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'id', 'password','email','role','admin',
+        'username', 'id','user_id', 'password','email','approved','role','admin',
     ];
 
     /**
@@ -46,6 +46,12 @@ class User extends Authenticatable
 
     public function is_admin(){
         if($this->admin==1){
+            return true;
+        }
+        return false;
+    }
+    public function is_approve(){
+        if($this->approved==1){
             return true;
         }
         return false;

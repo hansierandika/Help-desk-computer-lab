@@ -28,8 +28,12 @@ Route::get('/USolved', function () {
 });
 
 Route::get('/notification', function () {
-    return view('admin/notifications');
+    $data= App\User::where('approved',0)->get();
+    return view('admin/notifications',['data'=>$data]);
+
 });
+Route::get('approve/{id}','formController@approve')->name('approve');
+
 Route::get('/users', function () {
     return view('admin/user');
 });
