@@ -5,6 +5,22 @@ Dashboard
 @endsection
 
 @section('content')
+@if(count($errors)>0)
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if($message= Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
 <div class="container">
 <div class="wrapper ">
     <div class="sidebar" data-color="orange" style="margin-top: 100px; height: 560px">
@@ -29,26 +45,26 @@ Dashboard
                 <li>
                     <a href="users">
                         <i class="now-ui-icons users_single-02"></i>
-                        <p>User Profiles</p>
+                        <p>Admin Profile</p>
                     </a>
                 </li>
                 <li class="active">
                     <a href="tables">
                         <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Table List</p>
+                        <p>Users</p>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="main-panel" id="main-panel">
+    <div class="main-panel" id="main-panel" style="margin-top: 20px;">
 
         <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
           <div class="container-fluid">
             <div class="navbar-wrapper">
 
               <div class="col-md-10">
-              <h2 class="title">Table List</h2>
+              <h2 class="title">Tables</h2>
             </div>
             <div class="col-md-2">
                 <a class="btn btn-outline-dark" href="{{url('logout')}}" style="float: right;margin-top: 12px">Logout</a>
@@ -76,80 +92,34 @@ Dashboard
                     <div class="card  card-tasks">
                         <div class="card-header ">
 
-                            <h4 class="card-title">Tasks</h4>
+                            <h4 class="card-title">All Users</h4>
                         </div>
                         <div class="card-body ">
                             <div class="table-full-width table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                                                </div>
-                                            </td>
-                                            <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                                                <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox">
-                              <span class="form-check-sign"></span>
-                            </label>
-                                                </div>
-                                            </td>
-                                            <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                                                <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                                                </div>
-                                            </td>
-                                            <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                            </td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                                                <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                
+                                <table class="table table-striped table-dark" border = "1">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>                                                              
+                                        <th>Status</th>
+                                    </tr>
+                                    @php($count=0)
+                                    @foreach ($data as $usr)
+                                    <tr>
+                                        @php ($count++)
+                                        <td>{{ $count }}</td>
+                                        <td>{{ $usr->user_id }}</td>
+                                        <td>{{ $usr->username }}</td>
+                                        <td>{{ $usr->email }}</td>
+                                        <td> @if($usr->approved==0)Inactive @else Active @endif </td>
+                                    </tr>
+                                    @endforeach    
+                                </table>    
                             </div>
                         </div>
-                        <div class="card-footer ">
-                            <hr>
-                            <div class="stats">
-                                <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 

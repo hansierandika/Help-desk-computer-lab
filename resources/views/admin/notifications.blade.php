@@ -5,7 +5,23 @@ Dashboard
 @endsection
 
 @section('content')
-<div class="container">
+@if(count($errors)>0)
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if($message= Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+<div class="container" style="margin-top: 20%;height: 360px;margin-bottom: 50%;">
 <div class="wrapper ">
     <div class="sidebar" data-color="orange" style="margin-top: 100px; height: 560px">
 
@@ -29,13 +45,13 @@ Dashboard
                 <li>
                     <a href="users">
                         <i class="now-ui-icons users_single-02"></i>
-                        <p>User Profiles</p>
+                        <p>Admin Profile</p>
                     </a>
                 </li>
                 <li>
                     <a href="tables">
                         <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Table List</p>
+                        <p>Users</p>
                     </a>
                 </li>
             </ul>
@@ -67,14 +83,15 @@ Dashboard
 
 
         <div class="content">
-
+            @php($count=0)
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">Notifications Style</h4>
+                      <h4 class="card-title">Notifications</h4>
                     </div>
                     <div class="card-body">
+                        @if(count($data)>0)
                       <div class="alert alert-info">
 
                         <table border = "1">
@@ -84,7 +101,7 @@ Dashboard
                         <td>User Name</td>
                         <td>ID</td>
                         <td>Email</td>
-                        <td>Status</td>
+
                         <td>Action</td>
 
                         </tr>
@@ -93,13 +110,14 @@ Dashboard
 
                         @foreach ($data as $u)
                         <tr>
-<td>{{ $u->no }}</td>
+                            @php ($count++)
+<td> {{$count}}</td>
 <td>{{ $u->username }}</td>
 
 <td>{{ $u->user_id }}</td>
 <td>{{ $u->email }}</td>
-<td>@if($u->approved==0)Inactive @else Active @endif</td>
-<td><a href="{{ route('approve',['id'=>$u->user_id]) }}">@if($u->approved==1)Inactive @else Active @endif</a></td>
+
+<td><a href="{{ route('approve',['id'=>$u->user_id]) }}" class="btn btn-danger btn-sm">@if($u->approved==1)Inactive @else Make Active @endif</a></td>
 </tr>
                         @endforeach
 
@@ -108,70 +126,38 @@ Dashboard
 
 
                       </div>
-                      <div class="alert alert-info">
+                      @endif
+                      <div class="alert alert-danger">
                         <button type="button" aria-hidden="true" class="close">
                           <i class="now-ui-icons ui-1_simple-remove"></i>
                         </button>
-                        <span>This is a notification with close button.</span>
-                      </div>
-                      <div class="alert alert-info alert-with-icon" data-notify="container">
-                        <button type="button" aria-hidden="true" class="close">
-                          <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
-                        <span data-notify="message">This is a notification with close button and icon.</span>
-                      </div>
-                      <div class="alert alert-info alert-with-icon" data-notify="container">
-                        <button type="button" aria-hidden="true" class="close">
-                          <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
-                        <span data-notify="message">This is a notification with close button and icon and have many lines. You can see that the icon and the close button are always vertically aligned. This is a beautiful notification. So you don't have to worry about the style.</span>
+                        <span>New registed users must have admin approval for lag dashboard.</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="card">
                     <div class="card-header">
                       <h4 class="card-title">Notification states</h4>
                     </div>
                     <div class="card-body">
+
+                        @if(count($data3)>0)
                       <div class="alert alert-primary">
-                        <button type="button" aria-hidden="true" class="close">
-                          <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <span>
-                          <b> Primary - </b> This is a regular notification made with ".alert-primary"</span>
-                      </div>
-                      <div class="alert alert-info">
-                        <button type="button" aria-hidden="true" class="close">
-                          <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <span>
-                          <b> Info - </b> This is a regular notification made with ".alert-info"</span>
-                      </div>
-                      <div class="alert alert-success">
-                        <button type="button" aria-hidden="true" class="close">
-                          <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <span>
-                          <b> Success - </b> This is a regular notification made with ".alert-success"</span>
-                      </div>
-                      <div class="alert alert-warning">
-                        <button type="button" aria-hidden="true" class="close">
-                          <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <span>
-                          <b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
-                      </div>
-                      <div class="alert alert-danger">
-                        <button type="button" aria-hidden="true" class="close">
-                          <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <span>
-                          <b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
-                      </div>
+               <h4>There are {{ count($data3) }} issues must be fix.</h4>
+                    </div>
+                    @endif
+
+                    @if(count($data)>0)
+                    <div class="alert alert-primary">
+                        <h4> {{ count($data) }} users are pending for admin aproval</h4>
+                    </div>
+                             @endif
+
+                    </div>
+
+
                     </div>
                   </div>
                 </div>

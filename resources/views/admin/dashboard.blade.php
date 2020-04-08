@@ -5,15 +5,31 @@ Dashboard
 @endsection
 
 @section('content')
-<div class="container" style="margin-left: 20px;">
+@if(count($errors)>0)
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if($message= Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+<div class="container" style="margin-top: 20%;">
 <div class="wrapper">
-    <div class="sidebar" data-color="orange" style="margin-top: 10%; height: 80%">
+    <div class="sidebar" data-color="orange" style="margin-top: 100px; height: 560px">
 
        <br/>
         <hr/>
         <div class="sidebar-wrapper" id="sidebar-wrapper">
             <ul class="nav">
-                <li class="active">
+                <li class="active ">
                     <a href="dashboardAdmin">
                         <i class="now-ui-icons design_app"></i>
                         <p>Dashboard</p>
@@ -29,13 +45,13 @@ Dashboard
                 <li>
                     <a href="users">
                         <i class="now-ui-icons users_single-02"></i>
-                        <p>User Profiles</p>
+                        <p>Admin Profile</p>
                     </a>
                 </li>
                 <li>
                     <a href="tables">
                         <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Table List</p>
+                        <p>Users</p>
                     </a>
                 </li>
             </ul>
@@ -67,94 +83,63 @@ Dashboard
 
 
         <div class="content">
-            <div class="row">
-             
-            </div>
+            
 
-            <div class="row">
-
-                <div class="col-md-12">
-
-                    <div class="card  card-tasks">
-                        <div class="card-header ">
-
-                            <h4 class="card-title">Tasks</h4>
-                        </div>
-                        <div class="card-body ">
-                            <div class="table-full-width table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                                                </div>
-                                            </td>
-                                            <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                                                <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox">
-                              <span class="form-check-sign"></span>
-                            </label>
-                                                </div>
-                                            </td>
-                                            <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                                                <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                                                </div>
-                                            </td>
-                                            <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                            </td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                                                <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card-footer ">
-                            <hr>
-                            <div class="stats">
-                                <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
-                            </div>
-                        </div>
+            <div class="card" style="background-color: antiquewhite;height: max-content;width: max-content;padding: 5px;">
+                <div class="row">                
+                    <div class="col-md-12">
+                        <div class="card-body" style="width: fit-content;background-color: azure;margin: 2px;margin-left: 4px;">
+                            <legend>Hardware</legend>
+                        <table class="table table-striped table-dark" border = "1">
+                            <tr>
+                                <th>ID</th>
+                                <th>Computer Lab</th>
+                                <th>Machine Serial</th>
+                                <th>Type</th>
+                                <th>Discription</th>                        
+                                <th>Action</th>
+                            </tr>
+            
+                            @foreach ($data as $err)
+                            <tr>
+                                <td>{{ $err->user_id }}</td>
+                                <td>{{ $err->ComputerLab }}</td>
+                                <td>{{ $err->machineSerial }}</td>
+                                <td>{{ $err->type }}</td>
+                                <td>{{ $err->discription }}</td>
+                                <td><a href="{{ route('CorrectAdminH',['id'=>$err->user_id]) }}" class="btn btn-light btn-sm">@if($err->status==1)Inactive @else Mark as Fixed @endif</a></td>
+                            </tr>
+                            @endforeach    
+                        </table>    
                     </div>
                 </div>
-
+                </div>
+                <div class="row"></div>
+                    <div class="col-md-12">
+                        <div class="card-body" style="width: fit-content;background-color: azure;margin: 2px;">
+                            <legend>Software</legend>
+                        <table class="table table-striped table-dark" border = "1">
+                            <tr>
+                                <th>ID</th>
+                                <th>Computer Lab</th>
+                                <th>Machine Serial</th>
+                                <th>Discription</th>                        
+                                <th>Action</th>
+                            </tr>
+            
+                            @foreach ($data2 as $err)
+                            <tr>
+                                <td>{{ $err->user_id }}</td>
+                                <td>{{ $err->ComputerLab }}</td>
+                                <td>{{ $err->machineSerial }}</td>
+                                <td>{{ $err->softwarediscription }}</td>
+                                <td><a href="{{ route('CorrectAdminS',['id'=>$err->user_id]) }}" class="btn btn-light btn-sm">@if($err->status==1)Inactive @else Mark as Fixed @endif</a></td>
+                            </tr>
+                            @endforeach    
+                        </table> 
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
 
