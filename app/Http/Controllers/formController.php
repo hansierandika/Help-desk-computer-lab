@@ -17,12 +17,12 @@ class formController extends Controller
     function list(){
         /*$data= Isue::all();*/
         $id=Session::get('id');
-        $data= Isue::where('id',$id)->get();
+        $data= Isue::where('id',$id)->where('status','0')->get();
         return view('UView',['data'=>$data]);
     }
     function listS(){
         $id=Session::get('id');
-        $data= Isue::where('id',$id)->where('status','0')->get();
+        $data= Isue::where('id',$id)->where('status','1')->get();
         return view('USolved',['data'=>$data]);
     }
 

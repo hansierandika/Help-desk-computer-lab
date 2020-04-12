@@ -81,6 +81,8 @@ class AuthController extends Controller
          return redirect()->back();
     }
 
+    /*{{ action('AdminDashController@EditProfile',['id'=>$data[0]->user_id])}} */
+
     public function postRegistration(Request $request)
     {
         request()->validate([
@@ -155,7 +157,7 @@ class AuthController extends Controller
 
         ]);
    
-        $data=array('id'=>$req->id,'user_id'=>$req->id,'ComputerLab'=>$req->ComputerLab,'machineSerial'=>$req->machineSerial,'hardwareSoftware'=>$req->hardwareSoftware,'type'=>$req->type? $req-> get('type') : 'software','discription'=>$req->discription? $req-> get('discription') : 'software','softwarediscription'=>$req->softwarediscription? $req-> get('softwarediscription') : 'hardware','status'=>'0');
+        $data=array('user_id'=>$req->id,'ComputerLab'=>$req->ComputerLab,'machineSerial'=>$req->machineSerial,'hardwareSoftware'=>$req->hardwareSoftware,'type'=>$req->type? $req-> get('type') : 'software','discription'=>$req->discription? $req-> get('discription') : 'software','softwarediscription'=>$req->softwarediscription? $req-> get('softwarediscription') : 'hardware','status'=>'0');
         DB::table('isue')->insert($data);
       /*  Mail::to('erandikahansi95@gmail.com')->send(new SendMail($data));*/
 

@@ -14,8 +14,8 @@ class CreateIsueTable extends Migration
     public function up()
     {
         Schema::create('isue', function (Blueprint $table) {
-            $table->bigIncrements('no');
-            $table->string('id');
+            $table->bigIncrements('id');
+      
             $table->string('user_id');
             $table->string('ComputerLab');
             $table->string('machineSerial');

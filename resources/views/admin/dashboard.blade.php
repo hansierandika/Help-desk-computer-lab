@@ -86,15 +86,15 @@ Dashboard
             
 
             <div class="card" style="background-color: antiquewhite;height: max-content;width: max-content;padding: 5px;">
-                <div class="row">                
-                    <div class="col-md-12">
-                        <div class="card-body" style="width: fit-content;background-color: azure;margin: 2px;margin-left: 4px;">
+                @if(count($data)>0)
+                        <div class="card-body" style="width: fit-content;background-color: azure;margin: 1px;margin-left: 1px;">
+                            
                             <legend>Hardware</legend>
                         <table class="table table-striped table-dark" border = "1">
                             <tr>
                                 <th>ID</th>
-                                <th>Computer Lab</th>
-                                <th>Machine Serial</th>
+                                <th>Computer<br>Lab</th>
+                                <th>Machine<br>Serial</th>
                                 <th>Type</th>
                                 <th>Discription</th>                        
                                 <th>Action</th>
@@ -107,16 +107,18 @@ Dashboard
                                 <td>{{ $err->machineSerial }}</td>
                                 <td>{{ $err->type }}</td>
                                 <td>{{ $err->discription }}</td>
-                                <td><a href="{{ route('CorrectAdminH',['id'=>$err->user_id]) }}" class="btn btn-light btn-sm">@if($err->status==1)Inactive @else Mark as Fixed @endif</a></td>
+                                <td><a href="{{ route('CorrectAdminH',['id'=>$err->id]) }}" class="btn btn-light btn-sm">@if($err->status==1)Inactive @else Mark as Fixed @endif</a></td>
                             </tr>
                             @endforeach    
-                        </table>    
-                    </div>
-                </div>
-                </div>
-                <div class="row"></div>
-                    <div class="col-md-12">
+                        </table>  
+                    </div> 
+                        @endif 
+                   
+                
+                
+                    @if(count($data2)>0)
                         <div class="card-body" style="width: fit-content;background-color: azure;margin: 2px;">
+                            
                             <legend>Software</legend>
                         <table class="table table-striped table-dark" border = "1">
                             <tr>
@@ -133,12 +135,17 @@ Dashboard
                                 <td>{{ $err->ComputerLab }}</td>
                                 <td>{{ $err->machineSerial }}</td>
                                 <td>{{ $err->softwarediscription }}</td>
-                                <td><a href="{{ route('CorrectAdminS',['id'=>$err->user_id]) }}" class="btn btn-light btn-sm">@if($err->status==1)Inactive @else Mark as Fixed @endif</a></td>
+                                <td><a href="{{ route('CorrectAdminS',['id'=>$err->id]) }}" class="btn btn-light btn-sm">@if($err->status==1)Inactive @else Mark as Fixed @endif</a></td>
                             </tr>
                             @endforeach    
                         </table> 
+                        
                     </div>
-                    </div>
+                    @endif
+                    @if(count($data)<1 && (count($data2)<1))
+<h5>There is no new issues reported</h5>
+                    @endif
+                    
                 </div>
             </div>
         </div>

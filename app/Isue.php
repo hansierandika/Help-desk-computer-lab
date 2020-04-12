@@ -20,7 +20,8 @@ class Isue extends Model
     protected $table = "isue";
 
      protected $fillable = [
-        'id',
+         'id',
+        
         'user_id',
         'ComputerLab',
         'machineSerial',

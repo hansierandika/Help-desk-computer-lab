@@ -19,11 +19,11 @@ Route::get('/URecord', function () {
     return view('URecord');
 });
 Route::get('/UView', function () {
-    $data=App\Isue::all();
+    $data=App\Isue::where('status','0')->get();;
     return view('UView')->with('data',$data);
 });
 Route::get('/USolved', function () {
-    $data= App\Isue::where('status','0')->get();
+    $data= App\Isue::where('status','1')->get();
         return view('USolved',['data'=>$data]);
 });
 
@@ -36,9 +36,7 @@ Route::get('/notification', function () {
 });
 
 Route::get('approve/{id}','formController@approve')->name('approve');
-/*Route::get('EditProfile/{id}','AdminDashController@EditProfile')->name('EditProfile');*/
-Route::post('EditProfile/{id}','formController@EditProfile');
-Route::put('EditProfile','AdminDashController@EditProfile');
+Route::post('EditProfile','AdminDashController@EditProfile');
 
 Route::get('/users', function () {
     $data= App\User::where('role',1)->where('admin',0)->get();
@@ -84,11 +82,11 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 
-Route::get('CorrectEH/{id}','formController@CorrectEH')->name('CorrectEH');
-Route::get('CorrectES/{id}','formController@CorrectES')->name('CorrectES');
+Route::get('CorrectEH/{id}','SysController@CorrectEH')->name('CorrectEH');
+Route::get('CorrectES/{id}','SysController@CorrectES')->name('CorrectES');
 
-Route::get('CorrectAdminH/{id}','formController@CorrectAdminH')->name('CorrectAdminH');
-Route::get('CorrectAdminS/{id}','formController@CorrectAdminS')->name('CorrectAdminS');
+Route::get('CorrectAdminH/{id}','AdminDashController@CorrectAdminH')->name('CorrectAdminH');
+Route::get('CorrectAdminS/{id}','AdminDashController@CorrectAdminS')->name('CorrectAdminS');
 
 /*
 Route::get('login', 'AuthController@index');

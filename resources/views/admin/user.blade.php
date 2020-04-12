@@ -4,6 +4,22 @@
 Dashboard
 @endsection
 @section('content')
+  @if(count($errors)>0)
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if($message= Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dissmiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
 @if(count($errors)>0)
             <div class="alert alert-danger">
                 <button type="button" class="close" data-dissmiss="alert">x</button>
@@ -89,9 +105,9 @@ Dashboard
                 <h5 class="title">Edit Password</h5>
               </div>
               <div class="card-body">
-                <form action="{{ action('formController@EditProfile',['id'=>$data[0]->user_id])}}" method="POST">
+                <form action="{{url('EditProfile')}}" method="POST">
                     {{ csrf_field() }}
-                    <input type="hidden" class="form-control" name="User_id" value={{ old('user_id', $data[0]->user_id) }}>
+                    <input type="hidden" class="form-control" name="user_id" value={{ old('user_id', $data[0]->user_id) }}>
                   <div class="row">
 
                     <div class="col-md-12 px-1">
@@ -112,7 +128,7 @@ Dashboard
                       </div>
                     </div>
                   </div>
-                  <input type="submit" class="btn btn-success btn-sm" value="Update">
+                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Edit</button>
 
                 </form>
               </div>

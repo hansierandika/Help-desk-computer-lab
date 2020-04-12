@@ -5,8 +5,9 @@ use App\Isue;
 use App\User;
 use Illuminate\Http\Request;
 use Redirect;
+use Illuminate\Support\Facades\Hash;
 
-class SysController extends Controller
+class AdminDashController extends Controller
 {
     function errorL(){
         /*$data= Isue::all();*/
@@ -15,7 +16,7 @@ class SysController extends Controller
         $data2= Isue::where('status',0)->where('hardwareSoftware','Software')->get();
         return view('dashboardAdmin',['data'=>$data],['data2'=>$data2]);
     }
-    public function CorrectAdminH(Request$request,$id){
+    public function CorrectAdminH(Request $request,$id){
 $data=Isue::find($id);
 if($data->status==0){
     $data->status=1;
@@ -25,7 +26,7 @@ if($data->status==0){
 $data->save();
 return Redirect::to('dashboardAdmin')->with('message',$data->name='Error was fixed.');
     }
-    public function CorrectAdminS(Request$request,$id){
+    public function CorrectAdminS(Request $request,$id){
 $data2=Isue::find($id);
 if($data2->status==0){
     $data2->status=1;
@@ -36,18 +37,23 @@ $data2->save();
 return Redirect::to('dashboardAdmin')->with('message',$data2->name='Error was fixed.');
     }
     public function EditProfile(Request $request){
+        
+    
         $id=$request->user_id;
         $username=$request->username;
         $password=$request->password;
         $data= User::find($id);
         $data->username=$username;
-        $data->password=$password;
+        $data->password= Hash::make($password);
         $data->save();
-        $data= User::find($id);
+        $data= User::where('role',1)->where('admin',0)->get();
 
-     return view('users',['data'=>$data]);
+        return back()->withInput();
         
     }
+
+   
+    
        /* request()->validate([
            
          'username' => 'required',
